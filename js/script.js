@@ -1,4 +1,5 @@
 /* Variables globales */
+let verPresupuesto = false; //Esta variable es una bandera que controla si el usuario dispone de datos suficientes para poder ver su presupuesto
 
 /* Variables para ingresos */
 let listaIngresos = "";
@@ -8,6 +9,9 @@ let sumaIngresos = 0;
 /* Variables para gastos */
 let listaGastos = "";
 let sumaGastos = 0;
+
+/* Variables para ahorros */
+let valorAhorros = 0;
 
 function admIngresos() {
     let valorIngresoPrincipal = prompt("Introduzca el valor de su ingreso principal");
@@ -31,7 +35,7 @@ function admIngresos() {
     } else {
         alert("Opción inválida");
     }
-
+    verPresupuesto = true;
     alert("La suma total de ingresos es: " + sumaIngresos);
 }
 
@@ -57,16 +61,21 @@ function admAhorros() {
 }
 
 function calPresupuesto() {
-    let presupuesto = sumaIngresos + valorAhorros - sumaGastos;
 
+    if ((sumaIngresos >= 0) && (sumaGastos >= 0) && (valorAhorros >= 0) && (verPresupuesto)) {
+        let presupuesto = sumaIngresos + valorAhorros - sumaGastos;
 
-    alert("Concepto de ingresos: \n\n" + "Ingreso principal\n" + listaIngresos);
-    alert("Concepto de gastos: \n\n" + listaGastos);
-
-    alert("Los ingresos suman: " + sumaIngresos.toString() +
-        "\nLos gastos suman: " + sumaGastos.toString() +
-        "\nLos ahorros suman: " + valorAhorros.toString() +
-        "\n\nSu presupuesto para este mes es de " + presupuesto);
+        alert("Concepto de ingresos: \n\n" + "Ingreso principal\n" + listaIngresos);
+        if (listaGastos != "") {
+            alert("Concepto de gastos: \n\n" + listaGastos);
+        }
+        alert("Los ingresos suman: " + sumaIngresos.toString() +
+            "\nLos gastos suman: " + sumaGastos.toString() +
+            "\nLos ahorros suman: " + valorAhorros.toString() +
+            "\n\nSu presupuesto para este mes es de " + presupuesto);
+    } else {
+        alert("Algun/os de los valores introducidos en ingresos, gastos o ahorros es/son incorrectos o incompletos. Por favor, verifique.")
+    }
 }
 
 function principal() {
