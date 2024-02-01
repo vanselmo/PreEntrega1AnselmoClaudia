@@ -3,6 +3,7 @@ let verPresupuesto = false; //Esta variable es una bandera que controla si el us
 
 /* Variables para ingresos */
 let listaIngresos = "";
+let valorIngresoPrincipal = 0;
 let ingresosAdicionales = "";
 let sumaIngresos = 0;
 
@@ -13,30 +14,36 @@ let sumaGastos = 0;
 /* Variables para ahorros */
 let valorAhorros = 0;
 
+
+
 function admIngresos() {
-    let valorIngresoPrincipal = prompt("Introduzca el valor de su ingreso principal");
-    let nombreIngresoAdicional = "";
-    let valorIngresoAdicional = 0;
-    sumaIngresos = parseInt(valorIngresoPrincipal);
+    let valorIngresoPrincipal = prompt("Introduzca el valor de su ingreso principal o salario");
+    if (valorIngresoPrincipal >= 0) {
+        let nombreIngresoAdicional = "";
+        let valorIngresoAdicional = 0;
+        sumaIngresos = parseInt(valorIngresoPrincipal);
 
-    let agregarIngresosAdicionales = prompt("¿Desea agregar ingresos adicionales (aguinaldos, bonificaciones, premios, etc)? (S/N)");
+        let agregarIngresosAdicionales = prompt("¿Desea agregar ingresos adicionales (aguinaldos, bonificaciones, premios, etc)? (S/N)");
 
-    if (agregarIngresosAdicionales.toUpperCase() == "S") {
-        let numIngresosAdicionales = parseInt(prompt("¿Cuántos ingresos adicionales desea agregar?"));
+        if (agregarIngresosAdicionales.toUpperCase() == "S") {
+            let numIngresosAdicionales = parseInt(prompt("¿Cuántos ingresos adicionales desea agregar?"));
 
-        for (let i = 1; i <= numIngresosAdicionales; i++) {
-            nombreIngresoAdicional = prompt("Introduzca el nombre de su ingreso adicional #" + i);
-            valorIngresoAdicional = parseInt(prompt("Introduzca el valor de su ingreso adicional #" + i));
-            sumaIngresos += valorIngresoAdicional;
-            listaIngresos = listaIngresos + nombreIngresoAdicional + "\n";
+            for (let i = 1; i <= numIngresosAdicionales; i++) {
+                nombreIngresoAdicional = prompt("Introduzca el nombre de su ingreso adicional #" + i);
+                valorIngresoAdicional = parseInt(prompt("Introduzca el valor de su ingreso adicional #" + i));
+                sumaIngresos += valorIngresoAdicional;
+                listaIngresos = listaIngresos + nombreIngresoAdicional + "\n";
+            }
+        } else if (agregarIngresosAdicionales.toUpperCase() == "N") {
+            alert("Ok, no se agregarán ingresos adicionales");
+        } else {
+            alert("Opción inválida");
         }
-    } else if (agregarIngresosAdicionales.toUpperCase() == "N") {
-        alert("Ok, no se agregarán ingresos adicionales");
+        verPresupuesto = true;
+        alert("La suma total de ingresos es: " + sumaIngresos);
     } else {
-        alert("Opción inválida");
+        alert("Por favor ingrese un valor válido");
     }
-    verPresupuesto = true;
-    alert("La suma total de ingresos es: " + sumaIngresos);
 }
 
 
